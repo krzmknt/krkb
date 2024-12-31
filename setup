@@ -1,0 +1,5 @@
+#!/bin/bash
+
+cd zmk
+west init -l app
+west update

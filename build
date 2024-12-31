@@ -1,0 +1,77 @@
+#!/bin/bash
+
+set -e
+
+# Set artifact directories
+THIS_PATH=$(dirname "$(readlink -f "$0")")
+BUILD_ARTIFACT_DIR_NAME=build_artifacts
+BUILD_ARTIFACT_DIR_PATH=$THIS_PATH/$BUILD_ARTIFACT_DIR_NAME
+
+if [ -d $BUILD_ARTIFACT_DIR_PATH ]; then
+  echo "🧹🧹🧹 Cleaning up the previous build artifacts..."
+  rm -rf $BUILD_ARTIFACT_DIR_PATH
+fi
+mkdir $BUILD_ARTIFACT_DIR_PATH
+
+# Initial setups for zepher build
+export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
+
+# cp -rf ./config/leeloo_micro ./zmk/app/boards/shields/
+# cp -rf ./config/nice_view ./zmk/app/boards/shields/
+# cp -rf ./config/nice_view_adapter ./zmk/app/boards/shields/
+cd $THIS_PATH/zmk/app
+
+# Build left config
+west build -p always -d build/left -b nice_nano_v2 -- -DSHIELD="leeloo_micro_left nice_view_adapter nice_view" -DZMK_CONFIG="$THIS_PATH/config/leeloo_micro"
+echo "🎉🎉🎉 Build completed successfully!"
+
+# Build right config
+west build -p always -d build/right -b nice_nano_v2 -- -DSHIELD="leeloo_micro_right nice_view_adapter nice_view" -DZMK_CONFIG="$THIS_PATH/config/leeloo_micro"
+echo "🎉🎉🎉 Build completed successfully!"
+
+# Rename artifacts
+cp build/left/zephyr/zmk.uf2 $BUILD_ARTIFACT_DIR_PATH/leeloo_left-nice_nano_v2-zmk.uf2
+cp build/right/zephyr/zmk.uf2 $BUILD_ARTIFACT_DIR_PATH/leeloo_right-nice_nano_v2-zmk.uf2
+
+
+# Bootload
+TIMESTAMP=$(date +"%Y-%m-%d-%H-%M-%S")
+BACKUP_PATH=$THIS_PATH/uf2_backups/$TIMESTAMP
+mkdir -p $BACKUP_PATH
+
+
+function generate_bootload_script() {
+  SIDE=$1
+  BACKUP_PATH=$2
+  SCRIPT_PATH=$3
+
+  cat <<EOF > $SCRIPT_PATH
+#!/bin/bash
+
+# Backup
+echo "Backing up the current UF2 file..."
+cp /Volumes/NICENANO/CURRENT.UF2 $BACKUP_PATH/leeloo_$SIDE-nice_nano_v2-zmk.uf2
+echo "Backup completed successfully!"
+
+# Copy the new UF2 file
+cp $BUILD_ARTIFACT_DIR_PATH/leeloo_$SIDE-nice_nano_v2-zmk.uf2 /Volumes/NICENANO/
+
+cat <<EOE
+👀These are the errors that you might see during the bootload process. You can ignore them.
+> cp: /Volumes/NICENANO/leeloo_right-nice_nano_v2-zmk.uf2: fcopyfile failed: Input/output error
+> cp: $BUILD_ARTIFACT_DIR_PATH/leeloo_right-nice_nano_v2-zmk.uf2: could not copy extended attributes to /Volumes/NICENANO/leeloo_right-nice_nano_v2-zmk.uf2: Device not configured
+> cp: /Volumes/NICENANO/leeloo_right-nice_nano_v2-zmk.uf2: Device not configured
+EOE
+EOF
+
+  chmod +x $SCRIPT_PATH
+}
+
+generate_bootload_script right $BACKUP_PATH $BUILD_ARTIFACT_DIR_PATH/bootload-right
+generate_bootload_script left $BACKUP_PATH $BUILD_ARTIFACT_DIR_PATH/bootload-left
+
+cat <<EOF
+🚀🚀🚀 Bootload command:
+\`sh $BUILD_ARTIFACT_DIR_PATH/bootload-right\` for the right side deploy
+\`sh $BUILD_ARTIFACT_DIR_PATH/bootload-left\` for the left side deploy
+EOF
