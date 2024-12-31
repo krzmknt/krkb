@@ -34,13 +34,13 @@ cp build/left/zephyr/zmk.uf2 $BUILD_ARTIFACT_DIR_PATH/leeloo_left-nice_nano_v2-z
 cp build/right/zephyr/zmk.uf2 $BUILD_ARTIFACT_DIR_PATH/leeloo_right-nice_nano_v2-zmk.uf2
 
 
-# Bootload
+# Flash
 TIMESTAMP=$(date +"%Y-%m-%d-%H-%M-%S")
 BACKUP_PATH=$THIS_PATH/uf2_backups/$TIMESTAMP
 mkdir -p $BACKUP_PATH
 
 
-function generate_bootload_script() {
+function generate_flash_script() {
   SIDE=$1
   BACKUP_PATH=$2
   SCRIPT_PATH=$3
@@ -57,7 +57,7 @@ echo "Backup completed successfully!"
 cp $BUILD_ARTIFACT_DIR_PATH/leeloo_$SIDE-nice_nano_v2-zmk.uf2 /Volumes/NICENANO/
 
 cat <<EOE
-👀These are the errors that you might see during the bootload process. You can ignore them.
+👀These are the errors that you might see during the flash process. You can ignore them.
 > cp: /Volumes/NICENANO/leeloo_right-nice_nano_v2-zmk.uf2: fcopyfile failed: Input/output error
 > cp: $BUILD_ARTIFACT_DIR_PATH/leeloo_right-nice_nano_v2-zmk.uf2: could not copy extended attributes to /Volumes/NICENANO/leeloo_right-nice_nano_v2-zmk.uf2: Device not configured
 > cp: /Volumes/NICENANO/leeloo_right-nice_nano_v2-zmk.uf2: Device not configured
@@ -67,11 +67,11 @@ EOF
   chmod +x $SCRIPT_PATH
 }
 
-generate_bootload_script right $BACKUP_PATH $BUILD_ARTIFACT_DIR_PATH/bootload-right
-generate_bootload_script left $BACKUP_PATH $BUILD_ARTIFACT_DIR_PATH/bootload-left
+generate_flash_script right $BACKUP_PATH $BUILD_ARTIFACT_DIR_PATH/flash-right
+generate_flash_script left $BACKUP_PATH $BUILD_ARTIFACT_DIR_PATH/flash-left
 
 cat <<EOF
-🚀🚀🚀 Bootload command:
-\`sh $BUILD_ARTIFACT_DIR_PATH/bootload-right\` for the right side deploy
-\`sh $BUILD_ARTIFACT_DIR_PATH/bootload-left\` for the left side deploy
+🚀🚀🚀 flash command:
+Run \`sh $BUILD_ARTIFACT_DIR_PATH/flash-right\` to flash the right side.
+Run \`sh $BUILD_ARTIFACT_DIR_PATH/flash-left\` to flash the left side.
 EOF

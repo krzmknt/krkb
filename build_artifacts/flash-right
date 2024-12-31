@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Backup
+echo "Backing up the current UF2 file..."
+cp /Volumes/NICENANO/CURRENT.UF2 /Users/krzmknt/ghq/github.com/krzmknt/krkb/uf2_backups/2025-01-01-01-23-05/leeloo_right-nice_nano_v2-zmk.uf2
+echo "Backup completed successfully!"
+
+# Copy the new UF2 file
+cp /Users/krzmknt/ghq/github.com/krzmknt/krkb/build_artifacts/leeloo_right-nice_nano_v2-zmk.uf2 /Volumes/NICENANO/
+
+cat <<EOE
+👀These are the errors that you might see during the flash process. You can ignore them.
+> cp: /Volumes/NICENANO/leeloo_right-nice_nano_v2-zmk.uf2: fcopyfile failed: Input/output error
+> cp: /Users/krzmknt/ghq/github.com/krzmknt/krkb/build_artifacts/leeloo_right-nice_nano_v2-zmk.uf2: could not copy extended attributes to /Volumes/NICENANO/leeloo_right-nice_nano_v2-zmk.uf2: Device not configured
+> cp: /Volumes/NICENANO/leeloo_right-nice_nano_v2-zmk.uf2: Device not configured
+EOE
