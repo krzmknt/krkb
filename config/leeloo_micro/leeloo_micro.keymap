@@ -33,11 +33,6 @@
 };
 
 
-&mt {
-    tapping-term-ms = <2000>;
-};
-
-
 / {
 // ==============================================
     combos {
@@ -51,35 +46,28 @@
             layers = <L_Main>;
             bindings = <&kp ESC>;
         };
+
+        // J+K := BSPC
+        combo_bspc {
+            timeout-ms = <50>;
+            key-positions = <16 17>;
+            layers = <L_Main>;
+      bindings = <&kp BSPC>;
+        };
     };
 
 
-// ==============================================
+// =============================================
     macros {
 // ----------------------------------------------
-        enDSH_W: en_Dash {
-            display-name = "enDSH_W";
+        arichan: arichan {
+            display-name = "arichan";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <20>;
+            wait-ms = <0>;
+            tap-ms = <0>;
             bindings
-                = <&macro_press   &kp LALT>
-                , <&macro_tap     &kp KP_N0 &kp KP_N1 &kp KP_N5 &kp KP_N0>
-                , <&macro_release &kp LALT>
-                ;
-        };
-
-        emDSH_W: em_Dash {
-            display-name = "emDSH_W";
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            wait-ms = <20>;
-            tap-ms = <20>;
-            bindings
-                = <&macro_press   &kp LALT>
-                , <&macro_tap     &kp KP_N0 &kp KP_N1 &kp KP_N5 &kp KP_N1>
-                , <&macro_release &kp LALT>
+                = <&kp K &kp R &kp Z &kp M &kp K &kp N &kp T &kp RETURN>
                 ;
         };
     };
@@ -88,36 +76,13 @@
 // ==============================================
     behaviors {
 // ----------------------------------------------
-        tdw_LRP: tap_dance_2 {
-            compatible = "zmk,behavior-tap-dance";
-            display-name = "WIN_LRPAR";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp LPAR>, <&kp RPAR>;
-        };
-
-        tdx_LRB: tap_dance_3 {
-            compatible = "zmk,behavior-tap-dance";
-            display-name = "WIN_LRBKT";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp LBKT>, <&kp RBKT>;
-        };
-
-        tdx_LRR: tap_dance_4 {
-            compatible = "zmk,behavior-tap-dance";
-            display-name = "WIN_LRBRC";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp LBRC>, <&kp RBRC>;
-        };
-
-        tdx_LRA: tap_dance_5 {
-            compatible = "zmk,behavior-tap-dance";
-            display-name = "WIN_LRANG";
-            #binding-cells = <0>;
-            tapping-term-ms = <200>;
-            bindings = <&kp LT>, <&kp GT>;
+        tp: hold_tap_tap_preferred {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <300>;
+            quick-tap-ms = <200>;
+            bindings = <&kp>, <&kp>;
         };
     };
 
@@ -126,7 +91,6 @@
     keymap {
 // ----------------------------------------------
         compatible = "zmk,keymap";
-
 
 // ==============================================
         main_layer {
@@ -140,7 +104,7 @@
     &kp A          &kp S          &kp D          &kp F          &kp G                                                &kp H          &kp J          &kp K          &kp L          &kp SEMI
 // │              │              │              │              │              │              │       │              │              │              │              │              │              │
 // │   Z(20)      │   X(21)      │   C(22)      │   V(23)      │   B(24)      │   ♡(25)      │       │  BSP(26)     │   N(27)      │   M(28)      │   ,(29)      │   .(30)      │   /(31)      │
-    &mt LSFT Z     &kp X          &kp C          &kp V          &kp B          &mo L_SYS              &none          &kp N          &kp M          &kp COMMA      &kp DOT        &mt RSFT FSLH
+    &tp LSFT Z     &kp X          &kp C          &kp V          &kp B          &mo L_SYS              &arichan       &kp N          &kp M          &kp COMMA      &kp DOT        &tp RSFT FSLH
 // └──────────────┴──────────────┤              │              │              │              │       │              │              │              │              ├──────────────┴──────────────┘
 //                               │   `(32)      │  CTRL(33)    │ SPACE(34)    │  CMD(35)     │       │  INF(36)     │  RET(37)     │   ↓(38)      │   ↑(38)      │
                                   &kp LALT       &kp LCTRL      &lt L_CN SPACE &kp LGUI               &kp RGUI       &lt L_Num RETURN &lt L_MS MINUS &kp EQUAL
