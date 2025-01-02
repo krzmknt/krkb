@@ -2,7 +2,7 @@
 
 # Backup
 echo "Backing up the current UF2 file..."
-cp /Volumes/NICENANO/CURRENT.UF2 /Users/krzmknt/ghq/github.com/krzmknt/krkb/uf2_backups/2025-01-02-17-28-48/leeloo_left-nice_nano_v2-zmk.uf2
+cp /Volumes/NICENANO/CURRENT.UF2 /Users/krzmknt/ghq/github.com/krzmknt/krkb/uf2_backups/2025-01-02-20-01-37/leeloo_left-nice_nano_v2-zmk.uf2
 echo "Backup completed successfully!"
 
 # Copy the new UF2 file

@@ -140,10 +140,10 @@
     &kp A          &kp S          &kp D          &kp F          &kp G                                                &kp H          &kp J          &kp K          &kp L          &kp SEMI
 // │              │              │              │              │              │              │       │              │              │              │              │              │              │
 // │   Z(20)      │   X(21)      │   C(22)      │   V(23)      │   B(24)      │   ♡(25)      │       │  BSP(26)     │   N(27)      │   M(28)      │   ,(29)      │   .(30)      │   /(31)      │
-    &mt LSFT  Z    &kp X          &kp C          &kp V          &kp B          &mo L_SYS              &none          &kp N          &kp M          &kp COMMA      &kp DOT        &mt RSFT FSLH
+    &mt LSFT Z     &kp X          &kp C          &kp V          &kp B          &mo L_SYS              &none          &kp N          &kp M          &kp COMMA      &kp DOT        &mt RSFT FSLH
 // └──────────────┴──────────────┤              │              │              │              │       │              │              │              │              ├──────────────┴──────────────┘
 //                               │   `(32)      │  CTRL(33)    │ SPACE(34)    │  CMD(35)     │       │  INF(36)     │  RET(37)     │   ↓(38)      │   ↑(38)      │
-                                  &kp LALT       &kp LCTRL      &lt L_CN SPACE &kp LGUI               &kp RGUI       &lt L_Num BSPC &lt L_MS MINUS &kp EQUAL
+                                  &kp LALT       &kp LCTRL      &lt L_CN SPACE &kp LGUI               &kp RGUI       &lt L_Num RETURN &lt L_MS MINUS &kp EQUAL
 //                               └──────────────┴──────────────┴──────────────┴──────────────┘       └──────────────┴──────────────┴──────────────┴──────────────┘
             >;
         };
@@ -161,10 +161,10 @@
     &kp TAB        &none          &none          &none          &none                                                &kp LEFT       &kp DOWN       &kp UP         &kp RIGHT      &kp APOS
 // │              │              │              │              │              │              │       │              │              │              │              │              │              │
 // │   Z(20)      │   X(21)      │   C(22)      │   V(23)      │   B(24)      │   ♡(25)      │       │  BSP(26)     │   N(27)      │   M(28)      │   ,(29)      │   .(30)      │   /(31)      │
-    &trans         &none          &none          &none          &none          &none                  &trans         &kp DEL        &kp GRAVE      &kp LBKT       &kp RBKT       &kp BSLH
+    &trans         &none          &none          &none          &none          &none                  &trans         &kp DELETE     &kp GRAVE      &kp LBKT       &kp RBKT       &kp BSLH
 // └──────────────┴──────────────┤              │              │              │              │       │              │              │              │              ├──────────────┴──────────────┘
 //                               │   `(32)      │  CTRL(33)    │ SPACE(34)    │  CMD(35)     │       │  INF(36)     │  RET(37)     │   ↓(38)      │   ↑(38)      │
-                                  &trans         &trans         &trans         &trans                 &trans         &kp RETURN     &kp LPAR       &kp RPAR
+                                  &trans         &trans         &trans         &trans                 &trans         &kp BSPC       &kp LPAR       &kp RPAR
 //                               └──────────────┴──────────────┴──────────────┴──────────────┘       └──────────────┴──────────────┴──────────────┴──────────────┘
             >;
         };
@@ -176,13 +176,13 @@
             bindings = <
 // ┌──────────────┬──────────────┬──────────────┬──────────────┬──────────────┬──────────────┐       ┌──────────────┬──────────────┬──────────────┬──────────────┬──────────────┬──────────────┐
 // │    Q(0)      │    W(1)      │    E(2)      │    R(3)      │    T(4)      │              │       │              │    Y(5)      │    U(6)      │    I(7)      │    O(8)      │    P(9)      │
-    &trans         &trans         &trans         &trans         &trans                                               &trans         &kp N7         &kp N8         &kp N9         &trans
+    &trans         &trans         &trans         &trans         &trans                                               &trans         &kp NUMBER_7   &kp NUMBER_8   &kp NUMBER_9   &trans
 // │              │              │              │              │              │              │       │              │              │              │              │              │              │
 // │   A(10)      │   S(11)      │    D(12)     │   F(13)      │   G(14)      │              │       │              │   H(15)      │   J(16)      │   K(17)      │   L(18)      │   ;(19)      │
-    &trans         &trans         &trans         &trans         &trans                                               &trans         &kp N4         &kp N5         &kp N6         &trans
+    &trans         &trans         &trans         &trans         &trans                                               &trans         &kp NUMBER_4   &kp NUMBER_5   &kp NUMBER_6   &trans
 // │              │              │              │              │              │              │       │              │              │              │              │              │              │
 // │   Z(20)      │   X(21)      │   C(22)      │   V(23)      │   B(24)      │   ♡(25)      │       │  BSP(26)     │   N(27)      │   M(28)      │   ,(29)      │   .(30)      │   /(31)      │
-    &kp LSFT       &trans         &trans         &trans         &trans         &trans                 &trans         &kp N0         &kp N1         &kp N2         &kp N3         &kp RSFT
+    &kp LSFT       &trans         &trans         &trans         &trans         &trans                 &trans         &kp NUMBER_0   &kp NUMBER_1   &kp NUMBER_2   &kp NUMBER_3   &kp RSFT
 // └──────────────┴──────────────┤              │              │              │              │       │              │              │              │              ├──────────────┴──────────────┘
 //                               │   `(32)      │  CTRL(33)    │ SPACE(34)    │  CMD(35)     │       │  INF(36)     │  RET(37)     │   ↓(38)      │   ↑(38)      │
                                   &trans         &trans         &trans         &trans                 &trans         &trans         &trans         &trans
@@ -200,10 +200,10 @@
     &kp F1         &kp F2         &kp F3         &kp F4         &kp F5                                               &bt BT_SEL 0   &bt BT_SEL 1   &bt BT_SEL 2   &none          &bt BT_CLR
 // │              │              │              │              │              │              │       │              │              │              │              │              │              │
 // │   A(10)      │   S(11)      │    D(12)     │   F(13)      │   G(14)      │              │       │              │   H(15)      │   J(16)      │   K(17)      │   L(18)      │   ;(19)      │
-    &kp F6         &kp F7         &kp F8         &kp F9         &kp F10                                              &kp BRI_DN     &kp VOL_DN     &kp VOL_UP     &kp BRI_UP     &none
+    &kp F6         &kp F7         &kp F8         &kp F9         &kp F10                                              &kp C_BRI_DN   &kp C_VOL_DN   &kp C_VOL_UP   &kp C_BRI_UP   &none
 // │              │              │              │              │              │              │       │              │              │              │              │              │              │
 // │   Z(20)      │   X(21)      │   C(22)      │   V(23)      │   B(24)      │   ♡(25)      │       │  BSP(26)     │   N(27)      │   M(28)      │   ,(29)      │   .(30)      │   /(31)      │
-    &kp F11        &kp F12        &kp F13        &kp F14        &kp F15        &none                  &soft_off      &none          &none          &none          &none          &none
+    &kp F11        &kp F12        &kp F13        &kp F14        &kp F15        &none                  &none          &none          &none          &none          &none          &none
 // └──────────────┴──────────────┤              │              │              │              │       │              │              │              │              ├──────────────┴──────────────┘
 //                               │   `(32)      │  CTRL(33)    │ SPACE(34)    │  CMD(35)     │       │  INF(36)     │  RET(37)     │   ↓(38)      │   ↑(38)      │
                                   &none          &none          &none          &bootloader            &bootloader    &none          &none          &none

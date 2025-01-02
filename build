@@ -2,7 +2,15 @@
 
 set -e
 
+# ===============================================
+# Dependencies
+
+uv run west --version
+
+
+# ===============================================
 # Set artifact directories
+
 THIS_PATH=$(dirname "$(readlink -f "$0")")
 BUILD_ARTIFACT_DIR_NAME=build_artifacts
 BUILD_ARTIFACT_DIR_PATH=$THIS_PATH/$BUILD_ARTIFACT_DIR_NAME
@@ -22,11 +30,11 @@ export ZEPHYR_TOOLCHAIN_VARIANT=zephyr
 cd $THIS_PATH/zmk/app
 
 # Build left config
-west build -p always -d build/left -b nice_nano_v2 -- -DSHIELD="leeloo_micro_left nice_view_adapter nice_view" -DZMK_CONFIG="$THIS_PATH/config/leeloo_micro"
+uv run west build -p always -d build/left -b nice_nano_v2 -- -DSHIELD="leeloo_micro_left nice_view_adapter nice_view" -DZMK_CONFIG="$THIS_PATH/config/leeloo_micro"
 echo "🎉🎉🎉 Build completed successfully!"
 
 # Build right config
-west build -p always -d build/right -b nice_nano_v2 -- -DSHIELD="leeloo_micro_right nice_view_adapter nice_view" -DZMK_CONFIG="$THIS_PATH/config/leeloo_micro"
+uv run west build -p always -d build/right -b nice_nano_v2 -- -DSHIELD="leeloo_micro_right nice_view_adapter nice_view" -DZMK_CONFIG="$THIS_PATH/config/leeloo_micro"
 echo "🎉🎉🎉 Build completed successfully!"
 
 # Rename artifacts
